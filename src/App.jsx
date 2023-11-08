@@ -14,30 +14,16 @@ import List from "./components/List";
 // }
 
 function App() {
-  const [items, setItems] = useState([]);
-  const hasRunFirstTime = useRef(null);
-
-  // This effect runs when the component mounts and retrieves data from local storage
-  useEffect(() => {
-    const savedItems = localStorage.getItem("items");
-    //console.log(savedItems);
-    if (savedItems) {
-      setItems(JSON.parse(savedItems));
-    } else {
-      localStorage.setItem("items", JSON.stringify([]));
-    }
-  }, []); // The empty array [] makes this effect run only once after mounting
+  const [items, setItems] = useState(
+    localStorage.getItem("items")
+      ? JSON.parse(localStorage.getItem("items"))
+      : []
+  );
 
   // This effect runs whenever the 'items' state changes and saves it to local storage
   useEffect(() => {
-    console.log(hasRunFirstTime.current, items);
-    if (hasRunFirstTime.current) {
-      localStorage.setItem("items", JSON.stringify(items));
-      console.log("items is changed??");
-    } else {
-      console.log("setting first run");
-      hasRunFirstTime.current = true;
-    }
+    localStorage.setItem("items", JSON.stringify(items));
+    console.log("items is changed??");
   }, [items]);
 
   function addItem(newItem) {
