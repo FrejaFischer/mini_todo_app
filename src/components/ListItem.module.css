@@ -1,0 +1,17 @@
+.completed {
+  text-decoration: line-through;
+}
+ul {
+  padding: 0;
+}
+li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+li p {
+  width: 20rem;
+  padding: 1rem 0.5rem;
+  border: solid 0.1rem var(--blue-color);
+  border-radius: 1em;
+}

@@ -1,0 +1,11 @@
+form {
+  display: flex;
+  gap: 0.5rem;
+}
+.text_input {
+  border-radius: 1em;
+  padding: 1em;
+  background-color: var(--white-color);
+  color: var(--blue-color);
+  border: solid 0.1rem var(--blue-color);
+}

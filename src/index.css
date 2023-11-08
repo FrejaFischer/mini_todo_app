@@ -1,0 +1,49 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+
+  --blue-color: #001e57;
+  --white-color: #ffffff;
+
+  background-color: var(--white-color);
+  color: var(--blue-color);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  width: 100vw;
+  margin: 0;
+}
+
+.primary {
+  cursor: pointer;
+  border: solid 0.1rem var(--blue-color);
+  border-radius: 1em;
+  padding: 1em;
+  background-color: var(--white-color);
+  color: var(--blue-color);
+
+  &:hover {
+    background-color: var(--blue-color);
+    color: var(--white-color);
+  }
+}
+.secondary {
+  cursor: pointer;
+  width: 6rem;
+  border: none;
+  border-radius: 1em;
+  padding: 1em;
+  background-color: var(--blue-color);
+  color: var(--white-color);
+
+  &:hover {
+    background-color: var(--white-color);
+    color: var(--blue-color);
+    border: solid 0.1rem var(--blue-color);
+  }
+}
