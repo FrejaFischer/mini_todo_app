@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Form from "./components/Form";
 import List from "./components/List";
 
@@ -14,31 +14,30 @@ import List from "./components/List";
 // }
 
 function App() {
-  const [items, setItems] = useState([
-    {
-      task: "buy milk",
-      completed: false,
-      id: 1,
-    },
-    {
-      task: "bake cookies",
-      completed: true,
-      id: 2,
-    },
-  ]);
+  const [items, setItems] = useState([]);
+  const hasRunFirstTime = useRef(null);
 
   // This effect runs when the component mounts and retrieves data from local storage
   useEffect(() => {
     const savedItems = localStorage.getItem("items");
+    //console.log(savedItems);
     if (savedItems) {
       setItems(JSON.parse(savedItems));
+    } else {
+      localStorage.setItem("items", JSON.stringify([]));
     }
   }, []); // The empty array [] makes this effect run only once after mounting
 
   // This effect runs whenever the 'items' state changes and saves it to local storage
   useEffect(() => {
-    localStorage.setItem("items", JSON.stringify(items));
-    console.log("items is changed??");
+    console.log(hasRunFirstTime.current, items);
+    if (hasRunFirstTime.current) {
+      localStorage.setItem("items", JSON.stringify(items));
+      console.log("items is changed??");
+    } else {
+      console.log("setting first run");
+      hasRunFirstTime.current = true;
+    }
   }, [items]);
 
   function addItem(newItem) {
@@ -64,7 +63,11 @@ function App() {
     <main>
       <h1>My To-Do List</h1>
       <Form addItem={addItem} />
-      <List items={items} deleteItem={deleteItem} toggleCompleted={toggleCompleted} />
+      <List
+        items={items}
+        deleteItem={deleteItem}
+        toggleCompleted={toggleCompleted}
+      />
     </main>
   );
 }
